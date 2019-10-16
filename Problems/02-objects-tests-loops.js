@@ -26,7 +26,15 @@ function returnObject (first, last, prof) {
   // o.firstName = first
   // etc.
   // don't forget to return the object
+
+  var o = {}
+  o.firstName = first;
+  o.lastName = last;
+  o.profession = prof;
+return o;
 }
+
+console.log(returnObject("Italo", "Calvino", "novelist"));
 
 
 
@@ -62,8 +70,15 @@ function objectToSentence (obj) {
   // obj.propertyname
   // note the quotes in the first options
   // also note: you need to change this next line!!
-  return 'RETURNVALUE';
+
+  obj = {firstName: obj.firstName, lastName : obj.lastName, profession: obj.profession};
+
+  return obj.firstName + " " + obj.lastName + " was a " + obj.profession + ".";
+
 }
+
+console.log(objectToSentence ({firstName: 'Charles', lastName: 'Dickens', profession: 'writer'})); 
+
 
 
 // Problem 3
@@ -98,7 +113,19 @@ function wasWriter (obj) {
   // "return" statement inside the conditional braces
   // so you can, e.g.,
   // if (...) {return A} else {return B}
+
+obj = {firstName: obj.firstName, lastName : obj.lastName, profession: obj.profession};
+
+if (obj.profession === 'novelist') {
+return obj.firstName + " " + obj.lastName + " was a writer."}
+else {
+return obj.firstName + " " + obj.lastName + " was not a writer."}
+
 }
+
+console.log(wasWriter ({firstName: 'Charles', lastName: 'Dickens', profession: 'writer'})); 
+
+
 
 
 // Problem 4
@@ -118,8 +145,12 @@ function wasWriter (obj) {
 function stringIterator (aString, aNumber) {
   // remember a basic "for" loop has this structure:
   // for (var i = 0; i< SOMETHING; i++) {...statements...  };
+
+for (let i = 0; i < aNumber; i++) {return aString.repeat(aNumber)};
+
 }
 
+console.log(stringIterator('Hello', 3));
 
 // Problem 5
 // Improve upon the above function by adding the iteration number in
@@ -143,7 +174,14 @@ function stringIterator (aString, aNumber) {
  */
 function prettyIterator (aString, aNumber) {
   // be sure to check your results on this one; it has a trick. maybe 2. 
+  let output = "";
+  for (let i = 1; i <= aNumber; i++) 
+  {output = output + aString + "(" + i + ")" + "\n"} 
+    
+    return output;
 }
+
+console.log(prettyIterator('Hello', 4));
 
 
 
@@ -191,7 +229,14 @@ function computeReign (pm) {
   // attributes and variables. remember that you may need to
   // "escape" the ' with \'
   // finally, makre sure you return the sentence as the value of the function
+
+  pm = {fullName: pm.fullName, party: pm.party, from: pm.from, to: pm.to};
+  let durReign = pm.to - pm.from;
+  return pm.fullName + "\'s reign was " + durReign + " years long.";
+
 }
+
+console.log(computeReign({fullName: "Wilfred Laurier", party: "Liberal", from: 1896, to: 1911 }));
 
 
 
@@ -244,7 +289,25 @@ function sentences(list) {
   // is to use the "for...of" loop syntax to loop through the array,
   // and the object[attribute] or object.attribute reference format to access
   // the internal components of the objects.
+
+// you don't have to define list or ministers (etc.) because this is already set in the list 
+// you always have to define the variables that you use in the loop before -> but they can/have to (?) be empty
+let durReign; 
+let output = "";
+
+for (let i of list) // this substitutes i = 0, i <= list.length etc.
+{durReign = i.to - i.from; // the variable has to be defined inside the loop
+  output = output + i.fullName + "\'s reign was " + durReign + " years long." + "\n";} 
+  // i.fullName -> it uses different names as it loops through
+
+return output; 
+
 }
+
+console.log(sentences([{}]));
+
+
+
 
 // DO NOT MODIFY -- FOR AUTOMATED TESTING ONLY
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
